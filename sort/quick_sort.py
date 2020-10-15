@@ -11,13 +11,17 @@ def partation(arr: List[int], l: int, r: int):
     # 来跳过这个元素,保证每一次sort都会起码在待排序序列中去除一个元素
     arr[r], arr[(l + r) >> 1] = piviot, arr[r]
 
-    index = l
+    index = l  # index to save item less or equal than pivot
     for i in range(l, r):
         if arr[i] <= piviot:
             arr[index], arr[i] = arr[i], arr[index]
             index += 1
 
-    arr[r], arr[index] = arr[index], arr[r]
+    # 把pivot放在<=pivot的序列的后方,并且把其index返回,用于从待排序序列中去除pivot
+    arr[r], arr[index] = (
+        arr[index],
+        arr[r],
+    )
     return index
 
 
